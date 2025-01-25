@@ -86,6 +86,14 @@ void editor_normal(int c, BladeEditor *E) {
     sprintf(E->notification_buffer, "%i bytes coppied to clip",
             E->renderer->current->size - E->renderer->current->x);
   } break;
+  case 'A': {
+      E->mode = INSERT;
+      E->renderer->current->x = E->renderer->current->size;
+  } break;
+  case 'I': {
+      E->mode = INSERT;
+      E->renderer->current->x = 0;
+  } break;
   case KEY_DOT: {
     save_file(E->fb->open_entry_path, E->renderer->origin, false);
     E->fb = realloc_fb(E->fb, "..", E->renderer->win_h);

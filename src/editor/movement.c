@@ -60,28 +60,33 @@ void editor_apply_move(Lines_renderer *line_ren) {
        line_ren->current->x + line_ren->max_padding);
 }
 
-bool is_move(int key) {
+bool is_motion_move(int key)
+{
+  return (
+    KEY_J == key ||
+    KEY_JU == key ||
+    KEY_H == key ||
+    KEY_HU == key ||
+    KEY_K == key ||
+    KEY_KU == key ||
+    KEY_L == key ||
+    KEY_LU == key
+  );
+}
+
+bool is_move(int key, editorMode mode) {
+  if ((mode == VISUAL || mode == NORMAL) && is_motion_move(key))
+      return (true);
   return ((key == KEY_UP) || (key == KEY_DOWN) || (key == KEY_LEFT) ||
           (key == KEY_RIGHT)) ||
          (key == KEY_END) || (key == KEY_HOME) || (key == KEY_MOUSE) ||
          (key == L_SHIFT) || (key == R_SHIFT);
 }
-// void fb_handle_goto(FileBrowser *fb, size_t win_h, size_t idx) {
-//   if (idx < fb->cur_row && idx < fb->start) {
-//     fb->start  = idx;
-//     fb->end   -= (fb->start - idx); 
-//   }
-
-//   if (idx > fb->cur_row && idx > fb->end) {
-//     fb->end  = idx;
-//     fb->start   -= (idx - fb->end); 
-//   }
-//   fb->cur_row = idx;
-// }
-
 
 void fb_handle_mv(int c, FileBrowser *fb, size_t win_h) {
   switch (c) {
+  case KEY_KU:
+  case KEY_K:
   case KEY_UP: {
     if (fb->cur_row) {
       if (fb->cur_row - fb->start == 0) {
@@ -96,6 +101,8 @@ void fb_handle_mv(int c, FileBrowser *fb, size_t win_h) {
       fb->cur_row--;
     }
   } break;
+  case KEY_JU:
+  case KEY_J:
   case KEY_DOWN: {
     if (fb->cur_row < fb->size - 1)
       fb->cur_row++;
@@ -147,15 +154,23 @@ static void renderer_handle_mv(int c, Lines_renderer *line_ren) {
   charType _type;
 
   switch (c) {
+  case KEY_KU:
+  case KEY_K:
   case KEY_UP: {
     editor_up(line_ren);
   } break;
+  case KEY_JU:
+  case KEY_J:
   case KEY_DOWN: {
     editor_down(line_ren);
   } break;
+  case KEY_HU:
+  case KEY_H:
   case KEY_LEFT: {
     editor_left(line_ren);
   } break;
+  case KEY_LU:
+  case KEY_L:
   case KEY_RIGHT: {
     editor_right(line_ren);
   } break;
@@ -197,8 +212,6 @@ static void renderer_handle_mv(int c, Lines_renderer *line_ren) {
   case R_SHIFT: {
     // TODO: Implement this
     // TODO: This Solution is kinda bad, but I am leaving it this way until some
-    // time when I finishe important refactoring.
-
     editor_right(line_ren);
     {
       current_char = (line_ren->current->content + line_ren->current->x);
@@ -220,6 +233,7 @@ static void renderer_handle_mv(int c, Lines_renderer *line_ren) {
       }
     }
   } break;
+
   default: {
   } break;
   }

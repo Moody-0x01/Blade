@@ -1,8 +1,7 @@
 ## NOW WORKING ON:
-    
-
 doing now => 
     [] Make an integrated shell.
+    [] Add hjkl for movement.
 ## NOTEKEYS:
     [...] => Still under dev
     [*]   => Done

@@ -81,6 +81,21 @@
 #define MI_V "Blade 0.0.1\n"
 // command
 
+typedef enum MotionKey
+{
+  KEY_J = 'j',
+  KEY_JU = SHIFT(KEY_J),
+
+  KEY_H = 'h',
+  KEY_HU = SHIFT(KEY_H),
+
+  KEY_K = 'k',
+  KEY_KU = SHIFT(KEY_K),
+
+  KEY_L = 'l',
+  KEY_LU = SHIFT(KEY_L),
+} MotionKey;
+
 typedef struct eCommand {
   char *name;
   char **argv;
@@ -298,7 +313,10 @@ void editor_normal(int c, BladeEditor *E);
 void editor_handle_move(int c, BladeEditor *E);
 void editor_command_(BladeEditor *E);
 
-bool is_move(int key);
+/*bool is_move(int key);*/
+
+bool is_move(int key, editorMode mode);
+bool is_motion_move(int key);
 void editor_render_details(Lines_renderer *line_ren, char *_path,
                            editorMode mode_, char *notification);
 void editor_handle_binding(Lines_renderer *line_ren,

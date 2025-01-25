@@ -4,7 +4,6 @@
 #include <stdio.h>
 int editor(char **argv, const char *cfg_path) {
   setlocale(LC_CTYPE, "");  
-  // printf("[CFG LOADING]\n");
   EditorConfig_t *cfg = editor_resolve_cfg(cfg_path);
   if (!cfg) {
     return 1;
@@ -39,7 +38,8 @@ int editor(char **argv, const char *cfg_path) {
     }
 
     editor_load_layout(E);
-    if (is_move(c)) {
+    if (is_move(c, E->mode))
+    {
       editor_handle_move(c, E);
       goto UPDATE_EDITOR;
     }

@@ -30,7 +30,7 @@ Tui text editor made in ncurses, with an embdedded Music player, file browser, s
 ## Run
 ```console
     $ cd bin
-    $ ./mi <file_path/dir_path>
+    $ ./blade <file_path/dir_path>
 ```
 
 ## Keys and bindings.
@@ -69,9 +69,6 @@ Tui text editor made in ncurses, with an embdedded Music player, file browser, s
 - background
 - foreground
 
-# Next Up
-- [] review and fix bug.
-- [] Implementing a way to costumize the editor using a config file.
-- [] Implementing mode for language Highlighting
-- [] Implementing more commands to change stuff inside the editor.
-- [] Implementing smoother audio spect.
+# Added recently
+- added `hjkl`
+- added some useful vim moves like shift-a, shift-i..
