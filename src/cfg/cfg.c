@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#define DEFAULT_CFG_PATH "../cfg_examples/default.cfg"
 bool write_default_cfg(char *xdg_cfg_path) {
   int default_fd, fd;
   char *default_cfg;

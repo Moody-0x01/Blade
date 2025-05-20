@@ -105,8 +105,6 @@ void editor_load_layout(BladeEditor *E) {
 
 void release_editor(BladeEditor *E) {
   erase();
-  // printf("Cleaning up");
-  // getc(stdin);
   if (!E)
     return;
   if (E->fb)
@@ -115,7 +113,6 @@ void release_editor(BladeEditor *E) {
     free_lines(E->renderer->origin);
     free(E->renderer);
   }
-
   release_cfg(E->cfg);
   free(E);
   endwin();

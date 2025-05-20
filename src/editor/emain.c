@@ -1,7 +1,8 @@
 #include <common.h>
 #include <blade.h>
-#include <ncurses.h>
-#include <stdio.h>
+// #include <ncurses.h>
+// #include <stdio.h>
+
 int editor(char **argv, const char *cfg_path) {
   setlocale(LC_CTYPE, "");  
   EditorConfig_t *cfg = editor_resolve_cfg(cfg_path);
@@ -9,10 +10,8 @@ int editor(char **argv, const char *cfg_path) {
     return 1;
   }
   emoji_init(); // Init the emojis cache.
-  
   BladeEditor *E = init_editor(argv[1], cfg);
   cfg_interface(CFG_SET, cfg); 
-  // resolve_path(char *src, char *dest)
 
   int c = 0;
   if (E == NULL) {

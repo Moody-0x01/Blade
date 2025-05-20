@@ -92,6 +92,8 @@ void editor_normal(int c, BladeEditor *E) {
   } break;
   case 'a': {
       E->mode = INSERT;
+	  if (E->renderer->current->x <  E->renderer->current->size)
+		E->renderer->current->x = E->renderer->current->x + 1;
   } break;
   case 'I': {
       E->mode = INSERT;
@@ -115,8 +117,6 @@ void editor_normal(int c, BladeEditor *E) {
   } break;
   case KEY_INSERT_: {
     E->mode = INSERT;
-    if (E->renderer->current->x <  E->renderer->current->size)
-      E->renderer->current->x = E->renderer->current->x + 1;
   } break;
   case KEY_VISUAL_: {
     // we mark the chords of the start position!

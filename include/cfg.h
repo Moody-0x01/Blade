@@ -12,11 +12,7 @@
 #define BASE_16_PREFIX_UP   "0x"
 #define BASE_BIN_PREFIX     "0b"
 
-
-// typedef struct MiStatus_s {
-//   bool ok;
-//   char *errmsg; // Should be exclusively static.. read only.
-// } MiStatus_t;
+#define DEFAULT_CFG_PATH "../cfg_examples/default.cfg"
 
 typedef enum cfg_action_e {
   CFG_SET,
