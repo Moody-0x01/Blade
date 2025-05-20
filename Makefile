@@ -1,22 +1,14 @@
-
 CC=gcc
-OUT_DIR=./bin
-OUT_FILE=$(OUT_DIR)/blade
-TEST_FILE=./src/test.c
+STATIC=./static
+BIN=./bin
+BLADELIB=$(STATIC)/libblade.a
+MINIAUDIOLIB=$(STATIC)/libminiaudio.a
+MINIAUDIOSRC=./include/miniaudio/miniaudio.h
+NAME=$(BIN)/blade
+SRC=./src/main.c
 INCLUDE=-I./include
 CFLAGS=-Wall -pedantic -Wextra -std=c11 -ggdb
-SRC=./src/main.c
 LIBS=-lncursesw -lm -pthread
-# dir
-LOCAL_BIN=/usr/local/bin/blade
-STATICD = ./static
-OBJD    = ./obj
-DYND    = ./dynamic
-AUDIOLIB=$(OUT_DIR)/libaudiolib.so
-BLADELIB=$(OUT_DIR)/libBLADE.so
-FINAL_LIB=mlib.a
-
-# Sources.
 AUDIOAPISRC=./src/audio/*.c
 COMMONAPISRC=./src/common/*.c
 EDITORAPISRC=./src/editor/*.c
@@ -25,66 +17,36 @@ TOKENIZERAPISRC=./src/tokenizer/*.c
 FILEBROWSERAPISRC=./src/filebrowser/*.c
 CFGSRC=./src/cfg/*.c
 
-all: prepare_dir deps main
-bin: main
+all: $(NAME)
 
-prepare_dir:
-	mkdir -p $(STATICD)
-	mkdir -p $(OBJD)
-	mkdir -p $(DYND)
-	mkdir -p $(OUT_DIR)
+pre:
+	mkdir -p $(BIN)
+	mkdir -p $(STATIC)
 
-audioapi:
-	@echo ">> compiling miniaudio"
-	@$(CC) $(CFLAGS) $(INCLUDE) $(AUDIOAPISRC) -c $(LIBS) -fPIC
-	@mv *.o $(OBJD)
-	@# uncomment if u need to also compile dyn libs.
-	@# @$CC) $(CFLAGS) -shared -o $(AUDIOLIB) audioplayer.o audio.o
+$(MINIAUDIOLIB): $(MINIAUDIOSRC)
+	$(CC) -x c -c $(MINIAUDIOSRC)
+	ar rcs $@ miniaudio.o
+	rm miniaudio.o
 
-bladeapi:
-	@echo ">> compiling bladeapi"
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(COMMONAPISRC) $(LIBS) -fPIC
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(EDITORAPISRC) $(LIBS) -fPIC
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(VISUALAPISRC) $(LIBS) -fPIC
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(TOKENIZERAPISRC) $(LIBS) -fPIC
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(FILEBROWSERAPISRC) $(LIBS) -fPIC
-	@$(CC) $(CFLAGS) $(INCLUDE)  -c $(CFGSRC) $(LIBS) -fPIC
-	@mv *.o $(OBJD)
-	@# uncomment if u need to also compile dyn libs.
-	@#$(CC) $(CFLAGS) -shared -o $(BLADELIB) $(OBJD)/*.o
-	
-merge:
-	@echo ">> merging lib internal/external libs"
-	@ar rcs $(FINAL_LIB) $(OBJD)/*.o
-	@mv $(FINAL_LIB) $(STATICD)
-deps: audioapi bladeapi merge
+$(BLADELIB): $(AUDIOAPISRC) $(COMMONAPISRC) $(EDITORAPISRC) $(VISUALAPISRC) $(TOKENIZERAPISRC) $(FILEBROWSERAPISRC) $(CFGSRC)
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(COMMONAPISRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(EDITORAPISRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(VISUALAPISRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(TOKENIZERAPISRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(FILEBROWSERAPISRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(CFGSRC) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -c $(AUDIOAPISRC) -fPIC
+	ar rcs $@ *.o
+	rm *.o
 
-main: merge
-	@echo ">> compiling the final executable"
-	@$(CC) $(CFLAGS) $(INCLUDE) -o $(OUT_FILE) $(SRC) $(STATICD)/$(FINAL_LIB) $(LIBS)
-	@echo "To run the editor just run ./bin/blade :3"
+$(NAME): pre $(MINIAUDIOLIB) $(BLADELIB) $(SRC)
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(SRC) $(BLADELIB) $(MINIAUDIOLIB) $(LIBS) -fPIC
 
-run:
-	@$(OUT_FILE) . ; reset
-
-debug:
-	@valgrind $(OUT_FILE) $(TEST_FILE)
-
-install:
-	sudo mv $(OUT_FILE) $(LOCAL_BIN)
-	echo "blade was installed successfully (Into </usr/local/bin>), Run the \`blade\` Command to Start using the editor."
 clean:
-	@rm -rf $(OBJD)
-	@rm -rf *.o
+	rm -rf *.o
 
 fclean: clean
-	@rm -rf $(STATICD)
-	@rm -rf $(DYND)
-	@rm -rf $(OUT_DIR)
+	rm -rf $(STATIC)
+	rm -rf $(BIN)
 
 re: fclean all
-
-# Remake blade api then merge.
-reb: bladeapi bin
-rea: audioapi bin
-
