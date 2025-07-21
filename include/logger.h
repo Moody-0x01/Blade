@@ -11,4 +11,5 @@ void open_logger();
 void close_logger();
 FILE *get_logger_file_ptr();
 int log_into_f(const char *fmt, ...);
+
 #endif // LOGGER_H___
