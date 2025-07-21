@@ -32,6 +32,7 @@ void editor_visual(int c, BladeEditor *E) {
     E->highlighted_end.x = E->renderer->current->x; // x=0, Y=0
     E->highlighted_end.y = E->renderer->current->y; // x=0, Y=0
     E->highlighted_end._line = E->renderer->current;
+	set_cursor_style(BLOCK_STEADY);
     E->mode = NORMAL;
     clipboard_save_chunk(E->highlighted_start, E->highlighted_end);
   } break;
@@ -41,6 +42,7 @@ void editor_visual(int c, BladeEditor *E) {
     E->highlighted_end.x = E->renderer->current->x; // x=0, Y=0
     E->highlighted_end.y = E->renderer->current->y; // x=0, Y=0
     E->highlighted_end._line = E->renderer->current;
+	set_cursor_style(BLOCK_STEADY);
     E->mode = NORMAL;
     // Since we are cutting lines so a region of the render_lines, or the lines
     // as referred in the struct will be kille E->renderer->current =
@@ -88,15 +90,18 @@ void editor_normal(int c, BladeEditor *E) {
   } break;
   case 'A': {
       E->mode = INSERT;
+	  set_cursor_style(BAR_STEADY);
       E->renderer->current->x = E->renderer->current->size;
   } break;
   case 'a': {
       E->mode = INSERT;
+	  set_cursor_style(BAR_STEADY);
 	  if (E->renderer->current->x <  E->renderer->current->size)
 		E->renderer->current->x = E->renderer->current->x + 1;
   } break;
   case 'I': {
       E->mode = INSERT;
+	  set_cursor_style(BAR_STEADY);
       E->renderer->current->x = 0;
       while (isspace(E->renderer->current->content[E->renderer->current->x]))
         E->renderer->current->x++;
@@ -104,6 +109,7 @@ void editor_normal(int c, BladeEditor *E) {
   case KEY_DOT: {
     save_file(E->fb->open_entry_path, E->renderer->origin, false);
     E->fb = realloc_fb(E->fb, "..", E->renderer->win_h);
+	set_cursor_style(BLOCK_STEADY);
     if (E->fb->type == FILE__ || E->fb->type == NOT_EXIST) {
       load_file(E->fb->open_entry_path, E->renderer);
       E->mode = NORMAL;
@@ -116,11 +122,13 @@ void editor_normal(int c, BladeEditor *E) {
     editor_push_data_from_clip(E->renderer);
   } break;
   case KEY_INSERT_: {
+	set_cursor_style(BAR_STEADY);
     E->mode = INSERT;
   } break;
   case KEY_VISUAL_: {
     // we mark the chords of the start position!
     E->mode = VISUAL;
+	set_cursor_style(BLOCK_STEADY);
     E->highlighted_start.x = E->renderer->current->x;
     E->highlighted_start.y = E->renderer->current->y;
     E->highlighted_start._line = E->renderer->current;
@@ -314,6 +322,7 @@ void editor_file_browser(int c, BladeEditor *E) {
     FileType ft = entry.ftype;
     E->fb = realloc_fb(E->fb, entry.value, E->renderer->win_h);
 
+	set_cursor_style(BLOCK_STEADY);
     if (E->fb->type != DIR__) {
       if (ft == MP3) {
         editor_init_player_routine(E, E->fb->open_entry_path);

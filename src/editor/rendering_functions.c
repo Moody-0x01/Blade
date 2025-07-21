@@ -167,9 +167,7 @@ void editor_render(BladeEditor *E) {
 
   if (E->mode != MPLAYER) {
     erase();
-    curs_set(1);
   }
-
   switch (E->mode) {
   case FILEBROWSER: {
     render_file_browser(E);

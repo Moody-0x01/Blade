@@ -131,6 +131,7 @@ void editor_update(int c, BladeEditor *E) {
   // Globals.
   switch (c) {
   case ESC: {
+	set_cursor_style(BLOCK_STEADY);
     E->mode = NORMAL;
     return;
   } break;

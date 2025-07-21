@@ -315,3 +315,28 @@ char *slurp_file_content(const char *path) {
   fclose(stream);
   return (buffer);
 }
+
+void set_cursor_style(int style)
+{
+    switch(style) {
+        case BLOCK_BLINK: // Block blinking
+            printf("\033[1 q");
+            break;
+        case BLOCK_STEADY: // Block steady
+            printf("\033[2 q");
+            break;
+        case UNDR_BLINK: // Underline blinking
+            printf("\033[3 q");
+            break;
+        case UNDR_STEADY: // Underline steady
+            printf("\033[4 q");
+            break;
+        case BAR_BLINK: // Bar blinking (thin line)
+            printf("\033[5 q");
+            break;
+        case BAR_STEADY: // Bar steady (thin line)
+            printf("\033[6 q");
+            break;
+    }
+    fflush(stdout);
+}
