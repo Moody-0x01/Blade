@@ -3,7 +3,7 @@ STATIC=./static
 BIN=./bin
 BLADELIB=$(STATIC)/libblade.a
 MINIAUDIOLIB=$(STATIC)/libminiaudio.a
-MINIAUDIOSRC=./include/miniaudio/miniaudio.h
+MINIAUDIOSRC=./include/miniaudio/miniaudio.c
 NAME=$(BIN)/blade
 SRC=./src/main.c
 INCLUDE=-I./include
@@ -24,7 +24,7 @@ pre:
 	mkdir -p $(STATIC)
 
 $(MINIAUDIOLIB): $(MINIAUDIOSRC)
-	$(CC) -x c -c $(MINIAUDIOSRC)
+	$(CC) $(CFLAGS) -c $(MINIAUDIOSRC)
 	ar rcs $@ miniaudio.o
 	rm miniaudio.o
 

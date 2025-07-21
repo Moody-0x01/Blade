@@ -7,9 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MINIAUDIO_IMPLEMENTATION
-#include <miniaudio/miniaudio.h>
-#define _ISOC99_SOURCE
+// #define _ISOC99_SOURCE
 
 pthread_mutex_t Mutx;
 static float max_amp = -INFINITY;
