@@ -111,14 +111,6 @@ typedef enum ResultType { SUCCESS, ERROR } ResultType;
 
 typedef enum ErrorType { NONE, EXIT_SIG, EMPTY_BUFF } ErrorType;
 
-typedef enum editorMode {
-  NORMAL = 0,
-  VISUAL,
-  INSERT,
-  FILEBROWSER,
-  COMMAND,
-  MPLAYER
-} editorMode;
 char *get_modeascstr(editorMode mode);
 
 #define MAX_KEY_BINDIND 2

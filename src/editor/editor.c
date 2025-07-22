@@ -78,7 +78,7 @@ BladeEditor *init_editor(char *path, EditorConfig_t *cfg) {
     editor_render_details(E->renderer, E->fb->open_entry_path, E->mode,
                           E->notification_buffer);
   }
-
+  // set_cursor_style(BLOCK_STEADY);
   editor_register_(E);
   return (E);
 }
@@ -131,7 +131,7 @@ void editor_update(int c, BladeEditor *E) {
   // Globals.
   switch (c) {
   case ESC: {
-	set_cursor_style(BLOCK_STEADY);
+	// set_cursor_style(BLOCK_STEADY);
     E->mode = NORMAL;
     return;
   } break;

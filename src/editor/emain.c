@@ -17,9 +17,8 @@ int editor(char **argv, const char *cfg_path) {
   if (E == NULL) {
     goto EXIT_AND_RELEASE_RESOURCES;
   }
-
   while (true) {
-
+	refresh_cursor(E->mode);
     // NOTE: Dont remove halfdelay because it is essencial for some signal
     // interrupts, sometimes u need to wait for something to happen before
     // updating.

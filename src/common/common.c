@@ -340,3 +340,24 @@ void set_cursor_style(int style)
     }
     fflush(stdout);
 }
+
+void refresh_cursor(editorMode mode)
+{
+	curs_set(1);
+	switch (mode)
+	{
+		case VISUAL: 
+		case FILEBROWSER:
+		case MPLAYER:
+		case NORMAL: {
+			set_cursor_style(BLOCK_STEADY);
+		} break;
+		case COMMAND:
+		case INSERT: {
+			set_cursor_style(BAR_STEADY);
+		} break;
+		default: {
+			set_cursor_style(BLOCK_STEADY);
+		};
+	}
+}

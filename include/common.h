@@ -14,6 +14,15 @@
 #define BAR_STEADY 5
 #define STYLES 5
 
+typedef enum editorMode {
+  NORMAL = 0,
+  VISUAL,
+  INSERT,
+  FILEBROWSER,
+  COMMAND,
+  MPLAYER
+} editorMode;
+
 void  set_cursor_style(int style);
 int   max(int a, int b);
 int   min(int a, int b); 
@@ -27,7 +36,7 @@ void   string_clean(char *s);
 int    make_dir(char *path);
 size_t fsize(FILE *stream); 
 char   *slurp_file_content(const char *path);
-char *join_path(char *left, char *right);
-
+char   *join_path(char *left, char *right);
+void refresh_cursor(editorMode mode);
 #endif // COMMON_H
 
