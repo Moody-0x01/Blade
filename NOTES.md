@@ -1,7 +1,8 @@
 ## NOW WORKING ON:
 doing now => 
-    [] Make an integrated shell.
-    [] Add hjkl for movement.
+    <!-- [] Make an integrated shell. -->
+    [ ] add word movement, move front with W and move back with B in normal and visual modes
+    
 ## NOTEKEYS:
     [...] => Still under dev
     [*]   => Done
@@ -38,6 +39,7 @@ doing now =>
     [*] command Mode so we can add vim bindings.
     [*] ability to create/delete directories
     [*] ability to move/copy directories and files.
+    [*] Add hjkl for movement.
 
 ## POSSIBLE NAMES:
     > Fox

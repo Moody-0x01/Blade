@@ -94,6 +94,8 @@ typedef enum MotionKey
 
   KEY_L = 'l',
   KEY_LU = SHIFT(KEY_L),
+  KEY_B = 'b',
+  KEY_W = 'w'
 } MotionKey;
 
 typedef struct eCommand {
