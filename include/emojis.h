@@ -6,21 +6,21 @@
 #include <stdint.h>
 #include <stdlib.h>
 typedef enum EmojiKind {
-  E_FOLDER = 0,
-  E_FILE,
-  E_C_FILE,
-  E_PYFILE,
-  E_CHECK,
-  E_MUSIC,
-  E_COUNT
+	E_FOLDER = 0,
+	E_FILE,
+	E_C_FILE,
+	E_PYFILE,
+	E_CHECK,
+	E_MUSIC,
+	E_COUNT
 } EmojiKind;
 
 typedef enum EmojiPoolAction { INIT, GET } EmojiPoolAction;
 
 typedef struct Emoji {
-  uint32_t raw;
-  char decoded[EMOJI_BYTE_CAP];
-  size_t size;
+	uint32_t raw;
+	char decoded[EMOJI_BYTE_CAP];
+	size_t size;
 } Emoji;
 
 Emoji *emoji_pool(EmojiPoolAction a, EmojiKind kind);

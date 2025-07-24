@@ -80,7 +80,7 @@ void	ft_split_private(char **vec, char *str, char *charset)
 char	**split(char *str, char *charset, size_t *count)
 {
 	char	**vec;
-  *count = (count_words(str, charset));
+	*count = (count_words(str, charset));
 	vec = malloc(sizeof(char *) * (*count + 1));
 	ft_split_private(vec, str, charset);
 	return (vec);

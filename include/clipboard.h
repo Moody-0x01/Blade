@@ -3,9 +3,9 @@
 
 // clipboard api
 typedef enum ClipBoardEvent {
-    CFREE,
-    CGET,
-    CSET
+	CFREE,
+	CGET,
+	CSET
 } ClipBoardEvent;
 
 void *clipboard(ClipBoardEvent e, char *data);

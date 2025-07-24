@@ -15,37 +15,37 @@
 #define DEFAULT_CFG_PATH "../cfg_examples/default.cfg"
 
 typedef enum cfg_action_e {
-  CFG_SET,
-  CFG_GET
+	CFG_SET,
+	CFG_GET
 } cfg_action_t;
 
 
 typedef struct Theme {
-  int background, 
-  foreground,
-  keyword_color,
-  type_color, 
-  funcall_color,
-  special_token_color, 
-  string_lit_color, 
-  comment_color, 
-  highlight_bg_fb, highlight_fg_fb,
-  highlight_bg_vmode, highlight_fg_vmode,
-  details_bar_bg, details_bar_fg,
-  command_prompt_bg, command_prompt_fg,
-  blade_mode_bg, blade_mode_fg;
+	int background, 
+	foreground,
+	keyword_color,
+	type_color, 
+	funcall_color,
+	special_token_color, 
+	string_lit_color, 
+	comment_color, 
+	highlight_bg_fb, highlight_fg_fb,
+	highlight_bg_vmode, highlight_fg_vmode,
+	details_bar_bg, details_bar_fg,
+	command_prompt_bg, command_prompt_fg,
+	blade_mode_bg, blade_mode_fg;
 } Theme;
 
 
 
 typedef struct EditorConfig_s {
-  
-  // MiStatus_t status;
-  char *cfg_path;
-  bool autosave;
-  char indent_char;
-  int indent_count;
-  Theme theme;
+
+	// MiStatus_t status;
+	char *cfg_path;
+	bool autosave;
+	char indent_char;
+	int indent_count;
+	Theme theme;
 } EditorConfig_t;
 
 bool write_default_cfg(char *xdg_cfg_path);

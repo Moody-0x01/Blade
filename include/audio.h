@@ -17,18 +17,18 @@
 #define NSAMPLES 1024
 #define FFT_SIZE NSAMPLES
 typedef struct {
-  ma_decoder decoder;
-  ma_uint64  position;
-  ma_uint64  srate;
-  float 	   *samples;
-  ma_uint64  totalFrames;
-  double     duration;
-  uint32_t   framecount;
-  TComplexF fft_[FFT_SIZE]; // Needs to be loaded each frame.
-  TComplexF Input[FFT_SIZE];
-  float fft_abs[FFT_SIZE];
-  float spectrum[FFT_SIZE];     // Needs to be loaded each frame.
-  size_t spec_sz;
+	ma_decoder decoder;
+	ma_uint64  position;
+	ma_uint64  srate;
+	float 	   *samples;
+	ma_uint64  totalFrames;
+	double     duration;
+	uint32_t   framecount;
+	TComplexF fft_[FFT_SIZE]; // Needs to be loaded each frame.
+	TComplexF Input[FFT_SIZE];
+	float fft_abs[FFT_SIZE];
+	float spectrum[FFT_SIZE];     // Needs to be loaded each frame.
+	size_t spec_sz;
 } BladeAudio;
 
 void   init_audio(BladeAudio *audio);

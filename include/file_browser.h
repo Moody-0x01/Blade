@@ -12,35 +12,35 @@
 #define FILE_BROWSER_XPADDING FILE_BROWSER_YPADDING
 
 typedef enum fb_command_e {
-  MOVE = 0,
-  COPY,
-  FB_COMMAND_COUNT
+	MOVE = 0,
+	COPY,
+	FB_COMMAND_COUNT
 } fb_command_t;
 
 
 typedef struct BrowseEntry {
-  bool selected; 
-  BrowseEntryT etype;       // FILE__, DIR__, NOT_EXIST.
-  FileType     ftype;       // C, PYTHON, JS...
-  size_t       size;
-  char         *full_path; // /usr/foo 
-  char         *value;     // foo
+	bool selected; 
+	BrowseEntryT etype;       // FILE__, DIR__, NOT_EXIST.
+	FileType     ftype;       // C, PYTHON, JS...
+	size_t       size;
+	char         *full_path; // /usr/foo 
+	char         *value;     // foo
 } BrowseEntry;
 
 // typedef struct FileBrowser FileBrowser;
 
 typedef struct FileBrowser {
-  size_t cap, size, cur_row, start, end;
-  BrowseEntry *entries;
-  BrowseEntryT type;
-  char *open_entry_path; // current working path. it can the currrent open dir, or current open file.
-  char *rel_path; // Not the Real path but the ralative one 
-  array_t found;
+	size_t cap, size, cur_row, start, end;
+	BrowseEntry *entries;
+	BrowseEntryT type;
+	char *open_entry_path; // current working path. it can the currrent open dir, or current open file.
+	char *rel_path; // Not the Real path but the ralative one 
+	array_t found;
 } FileBrowser;
 
 void rem_entry_from_list(BrowseEntry *list, size_t size, size_t i);
 char *execute_fbsys_command(fb_command_t cmd, BrowseEntry src,
-            BrowseEntry dst);
+							BrowseEntry dst);
 BrowseEntryT get_entry_type(char *path);
 char **read_entire_dir(const char *dir_path);
 void get_entry_info(BrowseEntry *e);

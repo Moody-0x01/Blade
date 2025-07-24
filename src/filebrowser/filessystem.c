@@ -42,14 +42,14 @@ filessystem_t *slurp_fs(char *path)
 	}
 
 	entries = read_entire_dir(fs->full_path);
-	
+
 	if (entries == NULL) {
 		return (fs);
 	}
-	
+
 	fs->children = malloc(sizeof(*fs) * FILE_SYSTEM_CAP);
 	fs->ifs_cap  = FILE_SYSTEM_CAP;
-	
+
 	memset(fs->children, 0, FILE_SYSTEM_CAP * sizeof(fs->children));
 	for (int i = 0; entries[i] != NULL; i++) {
 		// > Resolve the path. [DONE]

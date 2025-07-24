@@ -15,12 +15,12 @@
 #define STYLES 5
 
 typedef enum editorMode {
-  NORMAL = 0,
-  VISUAL,
-  INSERT,
-  FILEBROWSER,
-  COMMAND,
-  MPLAYER
+	NORMAL = 0,
+	VISUAL,
+	INSERT,
+	FILEBROWSER,
+	COMMAND,
+	MPLAYER
 } editorMode;
 
 void  set_cursor_style(int style);

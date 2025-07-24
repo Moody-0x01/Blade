@@ -3,9 +3,9 @@
 #include <stdint.h>
 #include <stdlib.h>
 typedef struct Array {
-  size_t cap, size;
-  size_t _each; // Private that indecates the size of each element
-  void *data;
+	size_t cap, size;
+	size_t _each; // Private that indecates the size of each element
+	void *data;
 } array_t;
 void append_array(array_t *self, int data);
 void grow_array(array_t *self);

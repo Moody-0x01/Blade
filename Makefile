@@ -7,7 +7,7 @@ MINIAUDIOSRC=./include/miniaudio/miniaudio.c
 NAME=$(BIN)/blade
 SRC=./src/main.c
 INCLUDE=-I./include
-CFLAGS=-Wall -pedantic -Wextra -std=c11 -ggdb
+CFLAGS=-Wall -pedantic -Wextra -std=c11 -ggdb -O3
 LIBS=-lncursesw -lm -pthread
 SRCS=./src/audio/audio.c ./src/audio/audioplayer.c ./src/audio/fft.c ./src/common/Array.c ./src/common/chunk.c\
 	 ./src/common/clipboard.c ./src/common/common.c ./src/common/dir.c ./src/common/logger.c ./src/common/np_atoi_base.c\

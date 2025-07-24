@@ -3,11 +3,11 @@
 
 charType get_class(int key)
 {
-    if (isdigit(key)) return NUMBER;
-    if (isalpha(key) || key == '_') return ALPHABET;
-    if (isspace(key)) return SPACE;
-    if (ispunct(key)) return SYMBOL;
-    return UNK;
+	if (isdigit(key)) return NUMBER;
+	if (isalpha(key) || key == '_') return ALPHABET;
+	if (isspace(key)) return SPACE;
+	if (ispunct(key)) return SYMBOL;
+	return UNK;
 }
 
 

@@ -1,4 +1,4 @@
- -lncursesw
+-lncursesw
 -pthread 
 Wall 
 -pedantic 

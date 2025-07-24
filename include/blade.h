@@ -83,26 +83,26 @@
 
 typedef enum MotionKey
 {
-  KEY_J = 'j',
-  KEY_JU = SHIFT(KEY_J),
+	KEY_J = 'j',
+	KEY_JU = SHIFT(KEY_J),
 
-  KEY_H = 'h',
-  KEY_HU = SHIFT(KEY_H),
+	KEY_H = 'h',
+	KEY_HU = SHIFT(KEY_H),
 
-  KEY_K = 'k',
-  KEY_KU = SHIFT(KEY_K),
+	KEY_K = 'k',
+	KEY_KU = SHIFT(KEY_K),
 
-  KEY_L = 'l',
-  KEY_LU = SHIFT(KEY_L),
-  KEY_B = 'b',
-  KEY_W = 'w'
+	KEY_L = 'l',
+	KEY_LU = SHIFT(KEY_L),
+	KEY_B = 'b',
+	KEY_W = 'w'
 } MotionKey;
 
 typedef struct eCommand {
-  char *name;
-  char **argv;
-  size_t cap;
-  size_t size;
+	char *name;
+	char **argv;
+	size_t cap;
+	size_t size;
 } eCommand;
 
 typedef enum charType { NUMBER, SYMBOL, ALPHABET, SPACE, UNK } charType;
@@ -118,143 +118,143 @@ char *get_modeascstr(editorMode mode);
 #define MAX_KEY_BINDIND 2
 
 typedef enum bindingKind {
-  COPY_LINE, // yy
-  DEL_LINE,  // dd || cc
-  INDENT_LINE,
-  UNINDENT_LINE,
-  NOT_VALID
+	COPY_LINE, // yy
+	DEL_LINE,  // dd || cc
+	INDENT_LINE,
+	UNINDENT_LINE,
+	NOT_VALID
 } bindingKind;
 
 typedef struct Path {
-  int count, capacity;
-  char **items;
-  BrowseEntryT type;
+	int count, capacity;
+	char **items;
+	BrowseEntryT type;
 } Path;
 
 // It is okay cuz it does not need to be dynamic..
 typedef struct KeywordList {
-  int size;
-  char *extension;
-  char *_list[100];
+	int size;
+	char *extension;
+	char *_list[100];
 } KeywordList;
 
 // TODO: IMPLEMET FUNCTIONS THAT CAN COLLECT THESE TOKENS..
 typedef enum BladeTokenType {
-  /* Groups */
-  STR_LIT_INCOM,
-  STR_LIT,
-  NUMBER_LIT,
-  KEYWORD,
-  ID,
-  /* Special tokens. */
-  CALL,
-  C_INCLUDE,
-  C_TAG,
-  C_INCLUDE_FILE,
-  C_ENUM,
-  C_TYPEDEF,
-  C_STRUCT,
-  C_UNION,
-  TYPE,
-  _GENERIC_NULL,
-  COMMENT,
-  /* Syms */
-  EQ,          // =
-  GT,          // >
-  LT,          // <
-  AST,         // *
-  AND,         // &
-  PIPE,        // |
-  HASHTAG,     // #
-  OPAR_,       // (
-  CPAR_,       // )
-  OCERLY_,     // {
-  CCERLY_,     // }
-  OBRAC_,      // [
-  CBRAC_,      // ]
-  COMA,        // ,
-  PERIOD,      // .
-  DOLLARSIGN,  // $
-  AT,          // @
-  BANG,        // !
-  PLUS,        // +
-  MINUS,       // -
-  SEMICOLON,   // ;
-  COLON,       // :
-  FSLASH,      // /
-  BSLASH,      // '\' /
-  OTHER_PUNCT, // Any unknown punct.
+	/* Groups */
+	STR_LIT_INCOM,
+	STR_LIT,
+	NUMBER_LIT,
+	KEYWORD,
+	ID,
+	/* Special tokens. */
+	CALL,
+	C_INCLUDE,
+	C_TAG,
+	C_INCLUDE_FILE,
+	C_ENUM,
+	C_TYPEDEF,
+	C_STRUCT,
+	C_UNION,
+	TYPE,
+	_GENERIC_NULL,
+	COMMENT,
+	/* Syms */
+	EQ,          // =
+	GT,          // >
+	LT,          // <
+	AST,         // *
+	AND,         // &
+	PIPE,        // |
+	HASHTAG,     // #
+	OPAR_,       // (
+	CPAR_,       // )
+	OCERLY_,     // {
+	CCERLY_,     // }
+	OBRAC_,      // [
+	CBRAC_,      // ]
+	COMA,        // ,
+	PERIOD,      // .
+	DOLLARSIGN,  // $
+	AT,          // @
+	BANG,        // !
+	PLUS,        // +
+	MINUS,       // -
+	SEMICOLON,   // ;
+	COLON,       // :
+	FSLASH,      // /
+	BSLASH,      // '\' /
+	OTHER_PUNCT, // Any unknown punct.
 } BladeTokenType;
 
 typedef struct vKeyBindingQueue {
-  char keys[MAX_KEY_BINDIND];
-  int size;
-  bindingKind kind;
+	char keys[MAX_KEY_BINDIND];
+	int size;
+	bindingKind kind;
 } vKeyBindingQueue;
 
 typedef struct BladeToken {
-  BladeTokenType kind;
-  int xstart, xend;
-  char *data;
+	BladeTokenType kind;
+	int xstart, xend;
+	char *data;
 } BladeToken;
 
 typedef struct TokenList {
-  BladeToken *_list;
-  int size, cap;
+	BladeToken *_list;
+	int size, cap;
 } TokenList;
 
 typedef struct Chunk {
-  char *data;
-  int cap, size, lines;
+	char *data;
+	int cap, size, lines;
 } Chunk;
 
 typedef struct Line Line;
 
 typedef struct Vec2 {
-  int x, y;
-  Line *_line;
+	int x, y;
+	Line *_line;
 } Vec2;
 
 typedef struct Line {
-  int x, y, size, padding, cap, tokens_size;
-  char line_number[LINE_NUM_MAX];
-  char *content;
-  Line *next, *prev;
-  TokenList token_list;
+	int x, y, size, padding, cap, tokens_size;
+	char line_number[LINE_NUM_MAX];
+	char *content;
+	Line *next, *prev;
+	TokenList token_list;
 } Line;
 
 typedef struct Lines_renderer {
-  Line *origin;
-  Line *start;
-  Line *end;
-  Line *current;
-  int win_h, win_w;
-  int max_padding;
-  FileType file_type;
-  int count;
+	Line *origin;
+	Line *start;
+	Line *end;
+	Line *current;
+	int win_h, win_w;
+	int max_padding;
+	FileType file_type;
+	int count;
 } Lines_renderer;
 
 typedef struct Result {
-  ResultType type;
-  ErrorType etype;
-  char *data;
+	ResultType type;
+	ErrorType etype;
+	char *data;
 } Result;
 
 typedef struct BladeEditor {
-  Lines_renderer *renderer;
-  Vec2 highlighted_start,
-      highlighted_end; // The chordinated of highlighted text.
-  int highlighted_data_length;
-  char notification_buffer[4096];
-  bool exit_pressed, char_deleted;
-  editorMode mode;
-  WINDOW *ewindow;
-  vKeyBindingQueue binding_queue;
-  FileBrowser *fb;
-  BladeAudioPlayer *mplayer;
-  volatile sig_atomic_t resized;
-  char *cfg_path;
-  EditorConfig_t *cfg;
+	Lines_renderer *renderer;
+	Vec2 highlighted_start,
+	highlighted_end; // The chordinated of highlighted text.
+	int highlighted_data_length;
+	char notification_buffer[4096];
+	bool exit_pressed, char_deleted;
+	editorMode mode;
+	WINDOW *ewindow;
+	vKeyBindingQueue binding_queue;
+	FileBrowser *fb;
+	BladeAudioPlayer *mplayer;
+	volatile sig_atomic_t resized;
+	char *cfg_path;
+	EditorConfig_t *cfg;
 } BladeEditor;
 
 int editor(char **argv, const char *cfg_path);
@@ -312,9 +312,9 @@ void editor_command_(BladeEditor *E);
 bool is_move(int key, editorMode mode);
 bool is_motion_move(int key);
 void editor_render_details(Lines_renderer *line_ren, char *_path,
-                           editorMode mode_, char *notification);
+						   editorMode mode_, char *notification);
 void editor_handle_binding(Lines_renderer *line_ren,
-                           vKeyBindingQueue *bindings);
+						   vKeyBindingQueue *bindings);
 void editor_identify_binding(vKeyBindingQueue *bindings);
 void editor_command_execute(BladeEditor *E, char *command, editorMode mode);
 
