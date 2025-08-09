@@ -1,14 +1,16 @@
 CC=gcc
+HMAP_DIR=./hmap
 STATIC=./static
 BIN=./bin
+HMAP=./hmap/lib/libhmap.a
 BLADELIB=$(STATIC)/libblade.a
 MINIAUDIOLIB=$(STATIC)/libminiaudio.a
 MINIAUDIOSRC=./include/miniaudio/miniaudio.c
 NAME=$(BIN)/blade
 SRC=./src/main.c
-INCLUDE=-I./include
-CFLAGS=-Wall -pedantic -Wextra -std=c11 -ggdb -O3
-LIBS=-lncursesw -lm -pthread
+INCLUDE=-I./include -I$(HMAP_DIR)/include
+CFLAGS=-Wall -pedantic -Wextra -std=c11 -ggdb -O3 -Wno-unused-result
+LIBS=-L$(HMAP_DIR)/lib -lncursesw -lm -pthread -lhmap
 SRCS=./src/audio/audio.c ./src/audio/audioplayer.c ./src/audio/fft.c ./src/common/Array.c ./src/common/chunk.c\
 	 ./src/common/clipboard.c ./src/common/common.c ./src/common/dir.c ./src/common/logger.c ./src/common/np_atoi_base.c\
 	 ./src/common/path_t.c ./src/common/read_file.c ./src/common/signals_.c ./src/common/split.c ./src/common/xstring.c\
@@ -35,14 +37,17 @@ $(MINIAUDIOLIB): $(MINIAUDIOSRC)
 $(BLADELIB): $(OBJS)
 	ar rcs $@ $?
 
-$(NAME): pre $(MINIAUDIOLIB) $(BLADELIB) $(SRC)
+$(NAME): pre $(MINIAUDIOLIB) $(BLADELIB) $(SRC) $(HMAP)
 	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(SRC) $(BLADELIB) $(MINIAUDIOLIB) $(LIBS) -fPIC
-
+$(HMAP):
+	make -C $(HMAP_DIR)
 clean:
+	make -C $(HMAP_DIR) clean
 	rm -rf miniaudio.o
 	rm -rf $(OBJS)
 
 fclean: clean
+	make -C $(HMAP_DIR) fclean
 	rm -rf $(STATIC)
 	rm -rf $(BIN)
 

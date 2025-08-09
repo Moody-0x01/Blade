@@ -50,7 +50,7 @@ void editor_down(Lines_renderer *line_ren) {
 }
 
 void editor_right(Lines_renderer *line_ren) {
-	if (line_ren->current->x < line_ren->current->size)
+	if (line_ren->current->x < line_ren->current->size - 1)
 		line_ren->current->x++;
 }
 
@@ -255,10 +255,10 @@ static void renderer_handle_mv(int c, Lines_renderer *line_ren) {
 					return;
 				c = line_ren->current->content[line_ren->current->x + 1];
 			}
-			while (!isspace(c) && line_ren->current->x < line_ren->current->size) {
+			while (!isspace(c)) {
 				editor_right(line_ren);
-				if (line_ren->current->x == line_ren->current->size)
-					return;
+				if (line_ren->current->x == line_ren->current->size - 1)
+					return ;
 				c = line_ren->current->content[line_ren->current->x + 1];
 			}
 		} break;

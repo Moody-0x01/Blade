@@ -37,6 +37,7 @@ bool write_default_cfg(char *xdg_cfg_path) {
 EditorConfig_t *alloc_default_cfg(void)
 {
 	EditorConfig_t *cfg = malloc(sizeof(*cfg));
+	cfg->syntax_maps = new_hmap(HMAP_INIT_CAP);
 	{
 		// NOTE: the problem is that I need to always change this if 
 		// I change the default config

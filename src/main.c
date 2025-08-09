@@ -41,27 +41,24 @@ bool check_args(int argc, char **argv) {
 	return flag;
 }
 
-// #define EXP
-int main(int argc, char **argv) {
-	(void)argc;
-	int ret = 0;
-#ifdef EXP
-	// (void)argv;
-	// (void)argc;
-	if (argc == 3) {
-		int cmp = xstr(argv[1], argv[2]);
-		char *cmp_s = (cmp == 0) ? "Exists inside" : "does not exist inside";
-		printf("%s %s inside %s\n", argv[1], cmp_s, argv[2]);
+#define EXP
+
+#ifndef EXP
+	int main(int argc, char **argv) {
+		int ret = 0;
+		if (check_args(argc, argv)) {
+			ret = editor(argv, temp);
+			CLIPBOARD_FREE();
+			// THIS IS BECAUSE THE EDITOR SCREWS UP THE TERMINAL.
+			if (!ret)
+				system("reset");
+		}
+		return ret;
 	}
 #else
-	if (check_args(argc, argv)) {
-		ret = editor(argv, temp);
-		CLIPBOARD_FREE();
-		// THIS IS BECAUSE THE EDITOR SCREWS UP THE TERMINAL.
-		if (!ret)
-			system("reset");
+	int main()
+	{
+		printf("[!] TODO: Make a parser for the config\n");
+		return (0);
 	}
-#endif /* ifdef EXP */
-	return ret;
-}
-
+#endif

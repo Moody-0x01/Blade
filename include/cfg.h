@@ -3,6 +3,8 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <hmap.h>
+
 #define BASE_16_ASCII     "0123456789abcdef"
 #define BASE_16_ASCII_UP  "0123456789abcdef"
 #define BASE_10_ASCII     "0123456789"
@@ -36,11 +38,21 @@ typedef struct Theme {
 	blade_mode_bg, blade_mode_fg;
 } Theme;
 
+// TODO: Use a hashmap. [extension] => syntax rules || LanguageSyntax_t
+// It is okay cuz it does not need to be dynamic..
+typedef struct KeywordList {
+	int size;
+	char *extension;
+	char *_list[100];
+} KeywordList;
 
+typedef struct LanguageSyntax_s {
+	KeywordList list; // A list of keywords that belong to some language.
+} LanguageSyntax_t;
 
 typedef struct EditorConfig_s {
-
 	// MiStatus_t status;
+	hmap_t *syntax_maps;
 	char *cfg_path;
 	bool autosave;
 	char indent_char;

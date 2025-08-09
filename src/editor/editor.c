@@ -126,12 +126,13 @@ void editor_refresh(BladeEditor *E) {
 	editor_apply_move(E->renderer);
 	refresh();
 }
-
+// wdjiwdjiwjijdw
 void editor_update(int c, BladeEditor *E) {
 	// Globals.
 	switch (c) {
 		case ESC: {
 			// set_cursor_style(BLOCK_STEADY);
+			editor_left(E->renderer);
 			E->mode = NORMAL;
 			return;
 		} break;

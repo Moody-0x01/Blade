@@ -205,4 +205,8 @@ void release_cfg(EditorConfig_t *cfg) {
 			free(cfg->cfg_path);
 		free(cfg);
 	}
+	// TODO: release the map
+	// -> cfg->syntax_maps
+	// Make a callback and use it to map over  the buckets. free the structures.
+	destroy_hmap(cfg->syntax_maps);
 }

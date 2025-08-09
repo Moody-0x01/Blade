@@ -131,13 +131,6 @@ typedef struct Path {
 	BrowseEntryT type;
 } Path;
 
-// It is okay cuz it does not need to be dynamic..
-typedef struct KeywordList {
-	int size;
-	char *extension;
-	char *_list[100];
-} KeywordList;
-
 // TODO: IMPLEMET FUNCTIONS THAT CAN COLLECT THESE TOKENS..
 typedef enum BladeTokenType {
 	/* Groups */
