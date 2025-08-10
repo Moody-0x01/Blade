@@ -1,0 +1,3 @@
+[submodule "hmap"]
+	path = hmap
+	url = git@github.com:Moody-0x01/glorious_hmap.git
