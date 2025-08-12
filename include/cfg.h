@@ -52,8 +52,8 @@ typedef struct LanguageSyntax_s {
 
 typedef struct EditorConfig_s {
 	// MiStatus_t status;
-	hmap_t *syntax_maps;
-	char *cfg_path;
+	hmap_t *syntax_map;
+	char   *cfg_path;
 	bool autosave;
 	char indent_char;
 	int indent_count;
@@ -70,4 +70,5 @@ char	**split(char *str, char *charset, size_t *count);
 char *read_next_line(int fd);
 char *read_file(int fd);
 void release_cfg(EditorConfig_t *cfg);
+EditorConfig_t *cfg_parse_config(char *file);
 #endif // PARSING_H

@@ -177,6 +177,8 @@ typedef enum BladeTokenType {
 	FSLASH,      // /
 	BSLASH,      // '\' /
 	OTHER_PUNCT, // Any unknown punct.
+	NL_TOKEN,
+	UNKNOWN_TOKEN_KIND
 } BladeTokenType;
 
 typedef struct vKeyBindingQueue {
@@ -324,6 +326,8 @@ void chunk_distroy(Chunk *c);
 // Token List ops
 void token_list_append(TokenList *list, BladeTokenType kind, int xstart, int xend);
 void retokenize_line(Line *line, FileType file_type);
+void construct_punct_token(Line *line, FileType file_type, int *x);
+void construct_identifier(Line *line, FileType file_type, int *x, KeywordList *keywords_list);
 KeywordList *get_keywords_list(FileType s);
 bool is_keywrd(char *keywords[], char *word, int keywords_sz);
 char *get_token_kind_s(BladeTokenType t);

@@ -17,8 +17,8 @@ SRCS=./src/audio/audio.c ./src/audio/audioplayer.c ./src/audio/fft.c ./src/commo
 	 ./src/editor/binds.c ./src/editor/blade.c ./src/editor/classification.c ./src/editor/command.c ./src/editor/editor.c\
 	 ./src/editor/editor_command.c ./src/editor/emain.c ./src/editor/line.c ./src/editor/mode_executors.c\
 	 ./src/editor/movement.c ./src/editor/rendering_functions.c ./src/visuals/colors.c ./src/visuals/emojis.c\
-	 ./src/tokenizer/scripting.c ./src/tokenizer/token.c ./src/filebrowser/file_browser.c\
-	 ./src/filebrowser/filessystem.c ./src/cfg/cfg.c ./src/cfg/cfg_parser.c
+	 ./src/tokenizer/scripting.c ./src/tokenizer/construct_token.c ./src/tokenizer/token.c ./src/filebrowser/file_browser.c\
+ 	 ./src/filebrowser/filessystem.c ./src/cfg/cfg.c ./src/cfg/cfg_parser.c ./src/cfg/cfg_parse_config.c
 OBJS=$(SRCS:%.c=%.o)
 
 all: $(NAME)
@@ -38,7 +38,7 @@ $(BLADELIB): $(OBJS)
 	ar rcs $@ $?
 
 $(NAME): pre $(MINIAUDIOLIB) $(BLADELIB) $(SRC) $(HMAP)
-	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(SRC) $(BLADELIB) $(MINIAUDIOLIB) $(LIBS) -fPIC
+	$(CC) $(CFLAGS) $(INCLUDE) -o $@ $(SRC) $(BLADELIB) $(MINIAUDIOLIB) $(LIBS) -fPIC -no-pie
 $(HMAP):
 	make -C $(HMAP_DIR)
 clean:

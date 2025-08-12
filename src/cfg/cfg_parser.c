@@ -5,6 +5,8 @@
 #include <string.h>
 #include <sys/stat.h>
 
+// NOTE: This parser is garbage, complete piece of crap..
+// New rule, every statement should end with ';'
 EditorConfig_t *load_editor_config(char *file) {
 	EditorConfig_t *cfg;
 	bool stx_err = false;
@@ -179,7 +181,6 @@ EditorConfig_t *editor_resolve_cfg(const char *cfg_path) {
 		// NOTE: Writing the default config then returning a parsed version of it.
 		if (!write_default_cfg(xdg_cfg_path))
 			return (NULL);
-
 		cfg = (alloc_default_cfg());
 		cfg->cfg_path = xdg_cfg_path;
 		return (cfg);
@@ -206,7 +207,7 @@ void release_cfg(EditorConfig_t *cfg) {
 		free(cfg);
 	}
 	// TODO: release the map
-	// -> cfg->syntax_maps
+	// -> cfg->syntax_map
 	// Make a callback and use it to map over  the buckets. free the structures.
-	destroy_hmap(cfg->syntax_maps);
+	destroy_hmap(cfg->syntax_map);
 }

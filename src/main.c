@@ -58,7 +58,7 @@ bool check_args(int argc, char **argv) {
 #else
 	int main()
 	{
-		printf("[!] TODO: Make a parser for the config\n");
+		cfg_parse_config("/home/lazmoud/.config/blade/blade.cfg");
 		return (0);
 	}
 #endif
