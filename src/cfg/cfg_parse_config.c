@@ -17,7 +17,7 @@ static Line *cfg_tokenize_config(char *file)
 	stream = open(file, O_RDONLY);
 	line->content = read_file(stream);
 	line->size = strlen(line->content);
-	retokenize_line(line, UNSUP);
+	retokenize_line(line, BLADE_CFG);
 	close(stream);
 	return (line);
 }
@@ -31,7 +31,14 @@ EditorConfig_t *cfg_parse_config(char *file)
 	cfg->cfg_path = string_dup(file);
 	content = cfg_tokenize_config(file);
 	for (int index = 0; index < content->token_list.size; index++)
-		printf("[KIND: %s, DATA: %s]\n", get_token_kind_s(content->token_list._list[index].kind), content->token_list._list[index].data);
+	{
+		if (content->token_list._list[index].kind == COMMENT)
+			continue ;
+		// TODO: Parse info
+		printf("[KIND: %s, DATA: %s]\n", 
+			get_token_kind_s(content->token_list._list[index].kind),
+			content->token_list._list[index].data);
+	}
 	printf("\n");
 	return (cfg);
 }

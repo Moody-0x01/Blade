@@ -2,6 +2,8 @@
 
 void construct_punct_token(Line *line, FileType file_type, int *x)
 {
+	int start = 0, end = 0;
+
 	switch (line->content[*x])
 	{
 		case '=': {
@@ -16,11 +18,9 @@ void construct_punct_token(Line *line, FileType file_type, int *x)
 		case '<': {
 			if (file_type == C) { // gather an include source.
 				int start = *x;
-
 				while (*x < line->size && line->content[*x] != '>') {
 					(*x)++;
 				}
-
 				if (line->content[*x] == '>') {
 					token_list_append(&(line->token_list), C_INCLUDE_FILE, start, *x);
 					(*x)++;
@@ -55,11 +55,17 @@ void construct_punct_token(Line *line, FileType file_type, int *x)
 		} break;
 
 		case '#': {
-			if (file_type == PYTHON)
+
+			if (file_type == PYTHON || file_type == BLADE_CFG)
 			{
-				token_list_append(&(line->token_list), COMMENT, *x, line->size);
-				*x = line->size;
-				return;
+				start = (*x);
+				while (*x < line->size && (line->content[*x] != NL))
+					(*x)++;
+				end = (*x);
+				token_list_append(&(line->token_list), COMMENT, start, end);
+				if ((line->content[*x] == NL))
+					(*x)++;
+				return ;
 			}
 			token_list_append(&(line->token_list), HASHTAG, *x, *x);
 			(*x)++;
@@ -185,12 +191,13 @@ void construct_identifier(Line *line, FileType file_type, int *x, KeywordList *k
 	char temp[512] = {0};
 
 	start = (*x);
+	end = start;
 	temp[data_idx++] = line->content[(*x)++];
 	while ((isalnum(line->content[*x]) || (line->content[*x] == '_')) &&
 		*x < line->size) {
+		end = (*x);
 		temp[data_idx++] = line->content[(*x)++];
 	}
-	end = (*x - 1);
 	if (file_type == C) {
 		if (line->token_list.size) {
 			if (line->token_list._list[line->token_list.size - 1].kind ==
@@ -241,7 +248,7 @@ void construct_identifier(Line *line, FileType file_type, int *x, KeywordList *k
 			return ;
 		}
 	}
-	if (file_type == UNSUP) {
+	if (file_type == UNSUP || file_type == BLADE_CFG) {
 		token_list_append(
 			&(line->token_list),
 			ID,

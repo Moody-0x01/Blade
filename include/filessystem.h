@@ -16,6 +16,7 @@ typedef enum FileType {
 	JS,
 	GO, 
 	MP3,
+	BLADE_CFG,
 	UNSUP
 } FileType;
 
