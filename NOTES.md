@@ -1,7 +1,18 @@
 ## NOW WORKING ON:
 doing now => 
     <!-- [] Make an integrated shell. -->
-    [ ] add word movement, move front with W and move back with B in normal and visual modes
+    [ ] add word movement, move front with W and move back with B in normal and visual modes >> Did I add this???
+        > I mean it work but when I move forward it should stop at the start of the next word
+        
+        current Behviour:
+        Man    Here
+        ^
+          ^
+        
+        Expected:
+        Man    Here
+        ^
+               ^
     
 ## NOTEKEYS:
     [...] => Still under dev

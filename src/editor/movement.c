@@ -1,4 +1,5 @@
 #include <blade.h>
+#include <ctype.h>
 #include <stdio.h>
 
 void editor_up(Lines_renderer *line_ren) {
@@ -246,20 +247,20 @@ static void renderer_handle_mv(int c, Lines_renderer *line_ren) {
 			}
 		} break;
 		case KEY_W: {
-			if (line_ren->current->x == line_ren->current->size)
+			if (line_ren->current->x == line_ren->current->size - 1)
 				return;
-			char c = (line_ren->current->content[line_ren->current->x + 1]);
-			while (isspace(c)) {
-				editor_right(line_ren);
-				if (line_ren->current->x == line_ren->current->size)
-					return;
-				c = line_ren->current->content[line_ren->current->x + 1];
-			}
+			char c = (line_ren->current->content[line_ren->current->x]);
 			while (!isspace(c)) {
 				editor_right(line_ren);
 				if (line_ren->current->x == line_ren->current->size - 1)
 					return ;
-				c = line_ren->current->content[line_ren->current->x + 1];
+				c = line_ren->current->content[line_ren->current->x];
+			}
+			while (isspace(c)) {
+				editor_right(line_ren);
+				if (line_ren->current->x == line_ren->current->size - 1)
+					return;
+				c = line_ren->current->content[line_ren->current->x];
 			}
 		} break;
 		default: {
