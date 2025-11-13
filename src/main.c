@@ -41,7 +41,7 @@ bool check_args(int argc, char **argv) {
 	return flag;
 }
 
-#define EXP
+// #define EXP
 
 #ifndef EXP
 	int main(int argc, char **argv) {
@@ -56,7 +56,7 @@ bool check_args(int argc, char **argv) {
 		return ret;
 	}
 #else
-	int main()
+	int main(void)
 	{
 		cfg_parse_config("/home/lazmoud/.config/blade/blade.cfg");
 		return (0);

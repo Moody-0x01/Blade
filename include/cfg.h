@@ -3,7 +3,6 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
-#include <hmap.h>
 
 #define BASE_16_ASCII     "0123456789abcdef"
 #define BASE_16_ASCII_UP  "0123456789abcdef"
@@ -46,13 +45,13 @@ typedef struct KeywordList {
 	char *_list[100];
 } KeywordList;
 
-typedef struct LanguageSyntax_s {
-	KeywordList list; // A list of keywords that belong to some language.
-} LanguageSyntax_t;
+// typedef struct LanguageSyntax_s {
+// 	KeywordList list; // A list of keywords that belong to some language.
+// } LanguageSyntax_t;
 
 typedef struct EditorConfig_s {
 	// MiStatus_t status;
-	hmap_t *syntax_map;
+	// hmap_t *syntax_map;
 	char   *cfg_path;
 	bool autosave;
 	char indent_char;

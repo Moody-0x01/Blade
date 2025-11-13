@@ -150,7 +150,7 @@ EditorConfig_t *load_editor_config(char *file) {
 		return (cfg);
 	free(cfg->cfg_path);
 	free(cfg);
-	return NULL;
+	return (NULL);
 }
 
 EditorConfig_t *editor_resolve_cfg(const char *cfg_path) {
@@ -165,7 +165,7 @@ EditorConfig_t *editor_resolve_cfg(const char *cfg_path) {
 	if (cfg_path) {
 		cfg = load_editor_config((char *)cfg_path);
 		free(xdg_cfg_dir);
-		return cfg;
+		return (cfg);
 	}
 
 	// TODO: Check for the existence of xdg_cfg_path.
@@ -185,7 +185,6 @@ EditorConfig_t *editor_resolve_cfg(const char *cfg_path) {
 		cfg->cfg_path = xdg_cfg_path;
 		return (cfg);
 	}
-
 	// TODO: Load the config.
 	free(xdg_cfg_dir);
 	return (load_editor_config(xdg_cfg_path));
@@ -206,8 +205,4 @@ void release_cfg(EditorConfig_t *cfg) {
 			free(cfg->cfg_path);
 		free(cfg);
 	}
-	// TODO: release the map
-	// -> cfg->syntax_map
-	// Make a callback and use it to map over  the buckets. free the structures.
-	destroy_hmap(cfg->syntax_map);
 }
