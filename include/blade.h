@@ -32,9 +32,11 @@
 #include <sys/types.h>
 
 
+#define ARRAY_TYPE_INIT_CAP 64
 #define INIT_COMMAND_CAP 25
 
 #define ESC 0x1b
+
 #define KEY_CAP 'u'
 #define KEY_COMMAND_ ':'
 #define KEY_COMMAND_O ';'
@@ -60,6 +62,8 @@
 #define CTRL_Z CTRL('z')
 #define CTRL_C CTRL('c')
 #define CTRL_V CTRL('c')
+#define KEY_O 'o'
+#define KEY_OU SHIFT(KEY_O)
 
 #define LINE_SZ 512
 #define LINE_NUM_MAX 8

@@ -317,6 +317,9 @@ void editor_file_browser(int c, BladeEditor *E) {
 				// sprintf(E->notification_buffer, "went to %zu $SZ: %zu", fidx, E->fb->found.size);
 			}
 		} break;
+		// NOTE: Now u can open with either Enter or O_key
+		case KEY_O:
+		case KEY_OU:
 		case NL: {
 			BrowseEntry entry = E->fb->entries[E->fb->cur_row];
 			FileType ft = entry.ftype;

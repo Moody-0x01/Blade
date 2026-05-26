@@ -153,7 +153,7 @@ void fix_layout_file_browser(FileBrowser *fb, size_t window_height) {
 	}
 	fb->end = fb->size - 1;
 }
-#define ARRAY_TYPE_INIT_CAP 64
+
 FileBrowser *new_file_browser(const char *dir_path, size_t window_height) {
 	FileBrowser *fb = new_fb(dir_path);
 	load_dir_fb(fb);
